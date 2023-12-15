@@ -21,12 +21,18 @@ st.sidebar.caption("Escolha os Paises que Deseja visualizar os Restaurantes")
 def create_map(df):
     m = folium.Map(location=[df["latitude"].mean(), df["longitude"].mean()], zoom_start=3, layout="wide")
 
-    for index, row in df.iterrows():
-        folium.Marker(
-            location=[row["latitude"], row["longitude"]],
-            popup=f"{row['restaurant_name']} ({row['country']})",
-            icon=folium.Icon(color=row["color_name"])
-        ).add_to(m)
+    for country, color in zip(df["country"].unique(), df["color_name"].unique()):
+        country_df = df[df["country"] == country]
+        circle = folium.CircleMarker(
+            location=[country_df["latitude"].mean(), country_df["longitude"].mean()],
+            radius=country_df.shape[0] * 0.001,  # Ajuste conforme necessário
+            popup=f"{country} - {country_df.shape[0]} restaurantes",
+            color=color,
+            fill=True,
+            fill_color=color,
+            fill_opacity=0.6
+        )
+        m.add_child(circle)
 
     return m
 
