@@ -5,6 +5,7 @@ import pandas as pd
 import inflection
 import folium
 from streamlit_folium import folium_static
+import streamlit_folium as st_folium
 
 st.set_page_config(page_title="Home", layout="wide")
 
@@ -18,23 +19,6 @@ st.sidebar.caption("Escolha os Paises que Deseja visualizar os Restaurantes")
 # =======================================
 # Funções
 # =======================================
-def create_map(df):
-    m = folium.Map(location=[df["latitude"].mean(), df["longitude"].mean()], zoom_start=3, layout="wide")
-
-    for country, color in zip(df["country"].unique(), df["color_name"].unique()):
-        country_df = df[df["country"] == country]
-        circle = folium.CircleMarker(
-            location=[country_df["latitude"].mean(), country_df["longitude"].mean()],
-            radius=country_df.shape[0] * 0.001,  # Ajuste conforme necessário
-            popup=f"{country} - {country_df.shape[0]} restaurantes",
-            color=color,
-            fill=True,
-            fill_color=color,
-            fill_opacity=0.6
-        )
-        m.add_child(circle)
-
-    return m
 
 def rename_columns(dataframe):
     df = dataframe.copy()
@@ -77,6 +61,9 @@ def clean_code (df):
     #Inserindo a coluna "color_name" no dataset
     df.insert(loc=19, column="color_name", value=df["rating_color"].apply(color_name))
 
+    #Removendo restaurantes sem valores nas colunas
+    df = df[df["price_range"].notnull()]
+
     return df
 
 COUNTRIES = {
@@ -97,6 +84,28 @@ COUNTRIES = {
     216: "United States"
 }
 
+# Crie um mapa leaflet usando a função MakerCluster filtrando os restaurantes selecionados no filtro countries_options, pelas latitudes e longitudes dos restaurantes. Utilize as cores da função "color_name".
+def create_leaflet_map(df):
+    # Create a base map
+    map = folium.Map(location=[df["latitude"].mean(), df["longitude"].mean()], zoom_start=4)
+
+    # Add points to the map
+    marker_cluster = folium.plugins.MarkerCluster().add_to(map)
+
+    for index, row in df.iterrows():
+
+        popup_content = f"""
+        <b>{row["restaurant_name"]}</b><br>
+        <p>Price: {row["average_cost_for_two"]} {row["currency"]} for two<br>
+        Type: {row["cuisines"]}<br>
+        Aggregate Rating: {row["aggregate_rating"]}/{row["rating_text"]}</p>
+        """
+
+        folium.Marker([row["latitude"], row["longitude"]], popup=folium.Popup(popup_content, max_width=300), icon=folium.Icon(color=row["color_name"])).add_to(marker_cluster)
+
+    return folium_static(map)
+
+    
 def country_name(country_id):
     return COUNTRIES[country_id]
 
@@ -195,4 +204,7 @@ with tab1:
 filtered_df = df1[df1["country"].isin(countries_options)]
 
 # Criar o mapa
-folium_static(create_map(filtered_df))
+create_leaflet_map(filtered_df)
+
+#exibindo dataframe df1
+st.write(df1)
