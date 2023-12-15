@@ -19,7 +19,7 @@ st.sidebar.caption("Escolha os Paises que Deseja visualizar os Restaurantes")
 # Funções
 # =======================================
 def create_map(df):
-    m = folium.Map(location=[df["latitude"].mean(), df["longitude"].mean()], zoom_start=3)
+    m = folium.Map(location=[df["latitude"].mean(), df["longitude"].mean()], zoom_start=3, layout="wide")
 
     for index, row in df.iterrows():
         folium.Marker(
