@@ -205,6 +205,3 @@ filtered_df = df1[df1["country"].isin(countries_options)]
 
 # Criar o mapa
 create_leaflet_map(filtered_df)
-
-#exibindo dataframe df1
-st.write(df1)
