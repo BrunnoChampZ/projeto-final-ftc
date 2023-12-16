@@ -87,7 +87,7 @@ COUNTRIES = {
 # Crie um mapa leaflet usando a função MakerCluster filtrando os restaurantes selecionados no filtro countries_options, pelas latitudes e longitudes dos restaurantes. Utilize as cores da função "color_name".
 def create_leaflet_map(df):
     # Create a base map
-    map = folium.Map(location=[df["latitude"].mean(), df["longitude"].mean()], zoom_start=4, lenght = 100, width = 100)
+    map = folium.Map(location=[df["latitude"].mean(), df["longitude"].mean()], zoom_start=4, width="100%")
 
     # Add points to the map
     marker_cluster = folium.plugins.MarkerCluster().add_to(map)
