@@ -3,12 +3,12 @@ import streamlit as st
 import plotly.express as px
 
 def read_processed_data():
+    """ Esta função lê o dataset processado"""
     return pd.read_csv("dataset/processed/data.csv")
 
 def top_cities_restaurants(countries, selected_palette):
-            """ Esta função cria um gráfico interativo de barras do top 7 cidades com restaurantes com média de avaliação acima de 4,
-            que dá a possibilidade de marcar e desmarcar os países que possuem cidades com restaurantes com média de avaliação acima de 4."""
-
+            """ Esta função cria um gráfico interativo de barras do top 10 cidades com mais restaurantes,
+            de acordo com os países selecionados e com a paleta de cores escolhida"""
             df = read_processed_data()
 
             grouped_df = (
@@ -39,8 +39,7 @@ def top_cities_restaurants(countries, selected_palette):
 
 def top_best_restaurants(countries, selected_palette):
             """ Esta função cria um gráfico interativo de barras do top 7 cidades com restaurantes com média de avaliação acima de 4,
-            que dá a possibilidade de marcar e desmarcar os países que possuem cidades com restaurantes com média de avaliação acima de 4."""
-
+            de acordo com os países selecionados e com a paleta de cores escolhida"""
             df = read_processed_data()
 
             grouped_df = (
@@ -73,6 +72,8 @@ def top_best_restaurants(countries, selected_palette):
             return fig
 
 def top_worst_restaurants(countries, selected_palette):
+            """ Esta função cria um gráfico interativo de barras do top 7 cidades com restaurantes com média de avaliação abaixo de 2.5,
+            de acordo com os países selecionados e com a paleta de cores escolhida"""
             df = read_processed_data()
 
             grouped_df = (
@@ -105,6 +106,8 @@ def top_worst_restaurants(countries, selected_palette):
             return fig
 
 def most_cuisines(countries, selected_palette):
+            """ Esta função cria um gráfico interativo de barras do top 10 cidades com restaurantes com tipos culinários distintos,
+            de acordo com os países selecionados e com a paleta de cores escolhida"""
             df = read_processed_data()
 
             grouped_df = (

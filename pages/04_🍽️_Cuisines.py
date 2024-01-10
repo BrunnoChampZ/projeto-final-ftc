@@ -4,6 +4,7 @@ from utils import cuisines_data as cdt
 
 
 def make_sidebar(df):
+    """ Esta função cria a sidebar da página"""
     st.sidebar.markdown("## Filtros")
 
     countries = st.sidebar.multiselect(
@@ -39,6 +40,7 @@ def make_sidebar(df):
 
 
 def main():
+    """ Função principal da página"""
     st.set_page_config(page_title="Cuisines", page_icon="🍽️", layout="wide")
 
     df = cdt.read_processed_data()

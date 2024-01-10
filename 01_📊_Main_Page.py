@@ -15,7 +15,7 @@ RAW_DATA_PATH = f"./dataset/raw/zomato.csv"
 # =======================================
 
 def sidebar(df):
-
+    """ Esta função cria a sidebar da página"""
     image = Image.open("logo.jpg")
     st.sidebar.image(image, width=25)
 
@@ -42,10 +42,8 @@ def sidebar(df):
     return list(countries_options)
 
 def create_leaflet_map(df):
-    # Create a base map
+    """ Esta função cria o mapa de Geolocalização com os restaurantes"""
     map = folium.Map(location=[df["latitude"].mean(), df["longitude"].mean()], zoom_start=1)
-
-    # Add points to the map
     marker_cluster = folium.plugins.MarkerCluster().add_to(map)
 
     for index, row in df.iterrows():
@@ -63,7 +61,7 @@ def create_leaflet_map(df):
     folium_static(map, width=1000, height=700)
 
 def main():
-
+    """ Função principal da página"""
     df = process_data(RAW_DATA_PATH)
 
     st.set_page_config(page_title="Home", layout="wide")

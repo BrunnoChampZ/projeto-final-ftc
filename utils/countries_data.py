@@ -3,10 +3,12 @@ import streamlit as st
 import plotly.express as px
 
 def read_processed_data():
+    """ Esta função lê o dataset processado"""
     return pd.read_csv("dataset/processed/data.csv")
 
 def restaurants_by_country(countries, selected_palette):
-                """ Esta função cria um gráfico de barras com a quantidade de restaurantes por país"""
+                """ Esta função cria um gráfico de barras com a quantidade de restaurantes por país,
+                de acordo com os países selecionados e com a paleta de cores escolhida"""
                 df = read_processed_data()
 
                 grouped_df = (
@@ -34,8 +36,8 @@ def restaurants_by_country(countries, selected_palette):
                 return fig
 
 def cities_by_country(countries, selected_palette):
-                """ Esta função cria um gráfico de barras com a quantidade de cidades por país"""
-
+                """ Esta função cria um gráfico de barras com a quantidade de cidades por país,
+                de acordo com os países selecionados e com a paleta de cores escolhida"""
                 df = read_processed_data()
 
                 grouped_df = (
@@ -63,8 +65,8 @@ def cities_by_country(countries, selected_palette):
                 return fig
 
 def average_votes_per_country(countries, selected_palette):
-                """ Esta função cria um gráfico de barras com a média de avaliações por país"""
-                
+                """ Esta função cria um gráfico de barras com a média de avaliações por país,
+                de acordo com os países selecionados e com a paleta de cores escolhida"""
                 df = read_processed_data()
 
                 grouped_df = (
@@ -93,8 +95,8 @@ def average_votes_per_country(countries, selected_palette):
                 return fig
 
 def average_cost_for_two_per_country(countries, selected_palette):
-                """ Esta função cria um gráfico de barras com a média de custo por dois por país"""
-                
+                """ Esta função cria um gráfico de barras com a média de preço de um prato para duas pessoas por país,
+                de acordo com os países selecionados e com a paleta de cores escolhida"""
                 df = read_processed_data()
 
                 grouped_df = (

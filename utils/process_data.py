@@ -30,6 +30,7 @@ COLORS = {
 }
 
 def rename_columns(dataframe):
+    """ Esta função renomeia as colunas do dataset"""
     df = dataframe.copy()
     title = lambda x: inflection.titleize(x)
     snakecase = lambda x: inflection.underscore(x)
@@ -43,13 +44,15 @@ def rename_columns(dataframe):
     return df
 
 def country_name(country_id):
+    """ Esta função retorna o nome do país"""
     return COUNTRIES[country_id]
 
 def color_name(color_code):
+    """ Esta função retorna o nome da cor"""
     return COLORS[color_code]
 
 def create_price_type(price_range):
-
+    """ Esta função retorna o tipo de preço"""
     if price_range == "1":
         return "cheap"
     elif price_range == "2":
@@ -60,6 +63,7 @@ def create_price_type(price_range):
         return "gourmet"
 
 def columns_order(dataframe):
+    """ Esta função ordena as colunas do dataset"""
     df = dataframe.copy()
 
     new_cols_order = [
@@ -89,9 +93,7 @@ def columns_order(dataframe):
     return df.loc[:, new_cols_order]
 
 def process_data (file_path):
-    """ Esta função limpa os dados do dataset
-    """
-
+    """ Esta função limpa os dados do dataset"""
     df = pd.read_csv(file_path)
 
     df = rename_columns(df)

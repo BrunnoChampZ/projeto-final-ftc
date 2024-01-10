@@ -3,6 +3,7 @@ import plotly.express as px
 from utils import countries_data as cdt
 
 def make_sidebar(df):
+    """ Esta função cria a sidebar da página"""
     st.sidebar.markdown("## Filtros")
 
     countries = st.sidebar.multiselect(
@@ -18,6 +19,7 @@ def make_sidebar(df):
     return list(countries), selected_palette
 
 def main():
+    """ Função principal da página"""
     st.set_page_config(page_title="Countries", page_icon="🌍", layout="wide")
 
     df = cdt.read_processed_data()

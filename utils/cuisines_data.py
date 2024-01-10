@@ -3,9 +3,11 @@ import streamlit as st
 import plotly.express as px
 
 def read_processed_data():
+    """ Esta função lê o dataset processado"""
     return pd.read_csv("dataset/processed/data.csv")
 
 def top_cuisines():
+            """ Esta função seleciona os melhores restaurantes de cada tipo de culinária"""
             df = read_processed_data()
 
             cuisines = {
@@ -42,7 +44,7 @@ def top_cuisines():
             return cuisines
 
 def write_metrics():
-
+            """ Esta função cria os cards com os melhores restaurantes de cada tipo de culinária"""	
             cuisines = top_cuisines()
 
             italian, american, arabian, japonese, brazilian = st.columns(len(cuisines))
@@ -105,6 +107,7 @@ def write_metrics():
             return None
 
 def top_restaurants(countries, cuisines, top_n):
+            """ Esta função seleciona os melhores restaurantes de cada tipo de culinária"""
             df = read_processed_data()
 
             cols = [
@@ -127,6 +130,7 @@ def top_restaurants(countries, cuisines, top_n):
             return dataframe.head(top_n)
 
 def top_best_cuisines(countries, top_n, selected_palette):
+            """ Esta função cria um gráfico de barras com os melhores tipos de culinária, de acordo com a paleta de cores selecionada"""
             df = read_processed_data()
 
             lines = df["country"].isin(countries)
@@ -158,6 +162,7 @@ def top_best_cuisines(countries, top_n, selected_palette):
             return fig
 
 def top_worst_cuisines(countries, top_n, selected_palette):
+            """ Esta função cria um gráfico de barras com os piores tipos de culinária, de acordo com a paleta de cores selecionada"""
             df = read_processed_data()
 
             lines = df["country"].isin(countries)
