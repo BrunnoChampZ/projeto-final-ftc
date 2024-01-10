@@ -60,7 +60,7 @@ def write_metrics():
 
             with american:
                 st.metric(
-                    label=f'Italiana: {cuisines["American"]["restaurant_name"]}',
+                    label=f'Americana: {cuisines["American"]["restaurant_name"]}',
                     value=f'{cuisines["American"]["aggregate_rating"]}/5.0',
                     help=f"""
                     País: {cuisines["American"]['country']}\n
@@ -71,7 +71,7 @@ def write_metrics():
 
             with arabian:
                 st.metric(
-                    label=f'Italiana: {cuisines["Arabian"]["restaurant_name"]}',
+                    label=f'Árabe: {cuisines["Arabian"]["restaurant_name"]}',
                     value=f'{cuisines["Arabian"]["aggregate_rating"]}/5.0',
                     help=f"""
                     País: {cuisines["Arabian"]['country']}\n
@@ -82,7 +82,7 @@ def write_metrics():
 
             with japonese:
                 st.metric(
-                    label=f'Italiana: {cuisines["Japanese"]["restaurant_name"]}',
+                    label=f'Japonesa: {cuisines["Japanese"]["restaurant_name"]}',
                     value=f'{cuisines["Japanese"]["aggregate_rating"]}/5.0',
                     help=f"""
                     País: {cuisines["Japanese"]['country']}\n
@@ -93,7 +93,7 @@ def write_metrics():
 
             with brazilian:
                 st.metric(
-                    label=f'Italiana: {cuisines["Brazilian"]["restaurant_name"]}',
+                    label=f'Brasileira: {cuisines["Brazilian"]["restaurant_name"]}',
                     value=f'{cuisines["Brazilian"]["aggregate_rating"]}/5.0',
                     help=f"""
                     País: {cuisines["Brazilian"]['country']}\n
