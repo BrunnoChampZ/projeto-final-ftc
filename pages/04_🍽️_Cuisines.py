@@ -2,16 +2,21 @@ import streamlit as st
 import plotly.express as px
 from utils import cuisines_data as cdt
 
-
 def make_sidebar(df):
-    """ Esta função cria a sidebar da página"""
+    """Esta função cria a sidebar da página"""
     st.sidebar.markdown("## Filtros")
 
-    countries = st.sidebar.multiselect(
-        "Escolha os Paises que Deseja visualizar as Informações",
-        df.loc[:, "country"].unique().tolist(),
-        default=["Brazil", "United Kingdom", "India", "United States", "Turkey", "Australia"],
-    )
+    all_countries = ["Todos"] + df.loc[:, "country"].unique().tolist()
+    select_all_countries = st.sidebar.checkbox("Selecionar todos os países", True)
+
+    if select_all_countries:
+        selected_countries = all_countries
+    else:
+        selected_countries = st.sidebar.multiselect(
+            "Escolha os Paises que Deseja visualizar as Informações",
+            all_countries[1:],  # Exclui "Todos" da lista
+            default=["Brazil", "United Kingdom", "India", "United States", "Turkey", "Australia"],
+        )
 
     selected_palette = st.sidebar.selectbox(
         "Escolha a paleta de cores dos gráficos",
@@ -22,21 +27,26 @@ def make_sidebar(df):
         "Selecione a quantidade de Restaurantes que deseja visualizar", 1, 20, 10
     )
 
-    cuisines = st.sidebar.multiselect(
-        "Escolha os Tipos de Culinária ",
-        df.loc[:, "cuisines"].unique().tolist(),
-        default=[
-            "Home-made",
-            "BBQ",
-            "Japanese",
-            "Brazilian",
-            "Arabian",
-            "American",
-            "Italian",
-        ],
-    )
+    select_all_cuisines = st.sidebar.checkbox("Selecionar todas as cozinhas", True)
+    
+    if select_all_cuisines:
+        selected_cuisines = df.loc[:, "cuisines"].unique().tolist()
+    else:
+        selected_cuisines = st.sidebar.multiselect(
+            "Escolha os Tipos de Culinária ",
+            df.loc[:, "cuisines"].unique().tolist(),
+            default=[
+                "Home-made",
+                "BBQ",
+                "Japanese",
+                "Brazilian",
+                "Arabian",
+                "American",
+                "Italian",
+            ],
+        )
 
-    return list(countries), top_n, list(cuisines), selected_palette
+    return selected_countries, top_n, selected_cuisines, selected_palette
 
 
 def main():
