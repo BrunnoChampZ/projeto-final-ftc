@@ -8,7 +8,7 @@ from streamlit_folium import folium_static
 
 from utils.process_data import process_data
 
-RAW_DATA_PATH = f"./dataset/raw/zomato.csv"
+RAW_DATA_PATH = f"./dataset/raw/data.csv"
 
 # =======================================
 # Funções
