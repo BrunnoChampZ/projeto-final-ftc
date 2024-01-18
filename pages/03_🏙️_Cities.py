@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.express as px
 from utils import cities_data as cdt
 
-def make_sidebar(df):
+def sidebar(df):
     """ Esta função cria a sidebar da página"""
     st.sidebar.markdown("## Filtros")
 
@@ -37,7 +37,7 @@ def main():
 
     df = cdt.read_processed_data()
 
-    selected_countries,selected_palette = make_sidebar(df)
+    selected_countries,selected_palette = sidebar(df)
 
     st.markdown("# :cityscape: Visão Cidades")
 

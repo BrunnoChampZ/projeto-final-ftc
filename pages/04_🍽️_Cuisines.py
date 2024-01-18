@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.express as px
 from utils import cuisines_data as cdt
 
-def make_sidebar(df):
+def sidebar(df):
     """Esta função cria a sidebar da página"""
     st.sidebar.markdown("## Filtros")
 
@@ -55,7 +55,7 @@ def main():
 
     df = cdt.read_processed_data()
 
-    countries, top_n, cuisines, selected_pallete = make_sidebar(df)
+    countries, top_n, cuisines, selected_pallete = sidebar(df)
 
     st.markdown("# :knife_fork_plate: Visão Tipos de Cusinhas")
 
