@@ -16,7 +16,7 @@ RAW_DATA_PATH = f"./dataset/raw/zomato.csv"
 
 def sidebar(df):
     """ Esta função cria a sidebar da página"""
-    image = Image.open("logo.jpg")
+    image = Image.open("./img/logo.jpg")
     st.sidebar.image(image, width=25)
 
     st.sidebar.markdown("# Fome Zero!")
