@@ -3,10 +3,9 @@ import streamlit as st
 from PIL import Image
 import pandas as pd
 import folium
-import plotly.express as px
 from streamlit_folium import folium_static
 
-from utils import process_data
+from utils.process_data import process_data
 
 RAW_DATA_PATH = f"./dataset/raw/data.csv"
 
