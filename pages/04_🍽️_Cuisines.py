@@ -57,7 +57,7 @@ def main():
 
     countries, top_n, cuisines, selected_pallete = sidebar(df)
 
-    st.markdown("# :knife_fork_plate: Visão Tipos de Cusinhas")
+    st.markdown("# :knife_fork_plate: Visão Tipos de Culinárias")
 
     df_restaurants = cdt.top_restaurants(countries, cuisines, top_n)
 
