@@ -105,9 +105,6 @@ pessoas?
 13. Qual o tipo de culinária que possui mais restaurantes que aceitam pedidos
 online e fazem entregas?
 
-O objetivo desse projeto é criar um conjunto de gráficos e/ou tabelas que
-exibam essas métricas da melhor forma possível para o CEO.
-
 # 2. Premissas assumidas para análise
 
 ### 1. O conjunto de dados que representa o contexto está disponível na plataforma Kaggle.
