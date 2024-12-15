@@ -1,0 +1,23 @@
+[33mcommit 3b6ec9bc8e865f187abdcb173172173617284445[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Brunno Márcio <brunno.marcio@hotmail.com>
+Date:   Sun Dec 15 03:17:13 2024 -0300
+
+    Import libraries, create helper variables and load raw dataset
+
+[33mcommit 910b709fac66fffa45beaefc4098f754b0d14529[m
+Author: Brunno Márcio <brunno.marcio@hotmail.com>
+Date:   Sun Dec 15 02:50:08 2024 -0300
+
+    Add required packages
+
+[33mcommit 5e4053fd687b52b48278f813d99e996158ec076d[m
+Author: Brunno Márcio <brunno.marcio@hotmail.com>
+Date:   Sun Dec 15 02:37:15 2024 -0300
+
+    add dataset, img, notebook, pages and move .gitignore file to utils
+
+[33mcommit 9d4f9e6e449b786048ccb0a854f674c7640faa35[m
+Author: Brunno Márcio <brunno.marcio@hotmail.com>
+Date:   Sun Dec 15 02:02:25 2024 -0300
+
+    Initialize repository and set up virtual environment with Python 3.13
