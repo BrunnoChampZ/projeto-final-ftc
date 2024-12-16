@@ -6,7 +6,7 @@ import streamlit as st
 import plotly.express as px
 
 # Importing the data
-def read_processed_data(file_path):
+def read_processed_data():
     """ Function that reads the processed data """
     
     return pd.read_csv("dataset/processed/data.csv")
