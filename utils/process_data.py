@@ -16,7 +16,7 @@ COUNTRIES = {
     191: "Sri Lanka",
     208: "Turkey",
     214: "United Arab Emirates",
-    215: "United Kingdom",
+    215: "England",
     216: "United States"
 }
 
