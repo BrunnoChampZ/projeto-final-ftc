@@ -17,7 +17,7 @@ COUNTRIES = {
     208: "Turkey",
     214: "United Arab Emirates",
     215: "England",
-    216: "United States"
+    216: "United States of America"
 }
 
 # Function that lists the colors of the flags

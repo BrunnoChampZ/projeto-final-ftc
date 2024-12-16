@@ -26,7 +26,7 @@ def sidebar(df):
         selected_countries = container.multiselect(
             "Escolha os Países que Deseja visualizar as Informações:",
             all_countries[1:],  # Exclui "Todos" da lista
-            default=["Brazil", "England", "India", "United States", "Turkey", "Australia"],
+            default=["Brazil", "England", "India", "United States of America", "Turkey", "Australia"],
         )
 
     selected_palette = st.sidebar.selectbox(

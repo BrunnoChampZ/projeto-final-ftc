@@ -29,7 +29,7 @@ def sidebar(df):
     countries_options = st.sidebar.multiselect(
         "Escolha os Paises que Deseja visualizar os Restaurantes",
         df.loc[:, "country"].unique().tolist(),
-        default=["Brazil", "England", "India", "United States", "Turkey", "Australia"],
+        default=["Brazil", "England", "India", "United States of America", "Turkey", "Australia"],
     )
 
     st.sidebar.markdown("## Dados Tratados")
