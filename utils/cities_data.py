@@ -18,10 +18,9 @@ def top_cities_restaurants(countries, selected_palette):
             df = read_processed_data()
 
             grouped_df = (
-                df.loc[df["country"].isin(countries), ["restaurant_id", "country", "city"]]
-                .groupby(["country", "city"])
+                df.groupby(["country", "city"])
                 .count()
-                .sort_values(["restaurant_id", "city"], ascending=[False, True])
+                .sort_values(["restaurant_id","city"], ascending=[False, True])
                 .reset_index()
             )
 
@@ -33,11 +32,11 @@ def top_cities_restaurants(countries, selected_palette):
                 text_auto=".2f",
                 title="Top 10 Cidades com mais Restaurantes na Base de Dados",
                 labels={
-                    "city": "Cidade",
+                    "city": "Cidades",
                     "restaurant_id": "Quantidade de Restaurantes",
                     "country": "País",
                 },
-                color="country",
+                color="restaurant_id",
                 color_continuous_scale=selected_palette,
             )
 
@@ -67,7 +66,7 @@ def top_best_restaurants(countries, selected_palette):
                 text_auto=".2f",
                 title="Top 7 Cidades com Restaurantes com média de avaliação acima de 4",
                 labels={
-                    "city": "Cidade",
+                    "city": "Cidades",
                     "restaurant_id": "Quantidade de Restaurantes",
                     "country": "País",
                 },
@@ -101,7 +100,7 @@ def top_worst_restaurants(countries, selected_palette):
                 text_auto=".2f",
                 title="Top 7 Cidades com Restaurantes com média de avaliação abaixo de 2.5",
                 labels={
-                    "city": "Cidade",
+                    "city": "Cidades",
                     "restaurant_id": "Quantidade de Restaurantes",
                     "country": "País",
                 },

@@ -1,3 +1,6 @@
+# Description: This file contains the functions that process the data from the dataset.
+
+# Importing the libraries
 import inflection
 import pandas as pd
 
@@ -65,7 +68,7 @@ def create_price_type(price_range):
         return "gourmet"
 
 def columns_order(dataframe):
-
+    """ Function that changes the order of the columns """	
     df = dataframe.copy()
 
     new_cols_order = [

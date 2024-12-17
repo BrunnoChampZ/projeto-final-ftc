@@ -5,13 +5,16 @@ import streamlit as st
 import plotly.express as px
 from utils import cuisines_data as cdt
 
+# Importing the data
+df = cdt.read_processed_data()
+
 # Function that creates the sidebar
-def sidebar(df):
+def sidebar():
 
     """ Function that creates the sidebar """
     st.sidebar.markdown("## Filtros")
 
-    all_countries = ["Todos"] + df.loc[:, "country"].unique().tolist()
+    all_countries = df.loc[:, "country"].unique().tolist()
     select_all_countries = st.sidebar.checkbox("Selecionar todos os países", True)
 
     if select_all_countries:
@@ -25,11 +28,11 @@ def sidebar(df):
 
     selected_palette = st.sidebar.selectbox(
         "Escolha a paleta de cores dos gráficos",
-        px.colors.named_colorscales(), index=4
+        px.colors.named_colorscales(), index=0
     )
 
     top_n = st.sidebar.slider(
-        "Selecione a quantidade de Restaurantes que deseja visualizar", 1, 20, 10
+        "Selecione a quantidade de Restaurantes que deseja visualizar", 1,10,20
     )
 
     select_all_cuisines = st.sidebar.checkbox("Selecionar todas as cozinhas", True)
@@ -61,7 +64,7 @@ def main():
 
     df = cdt.read_processed_data()
 
-    countries, top_n, cuisines, selected_pallete = sidebar(df)
+    countries, top_n, cuisines, selected_pallete = sidebar()
 
     st.markdown("# :knife_fork_plate: Visão Tipos de Culinárias")
 

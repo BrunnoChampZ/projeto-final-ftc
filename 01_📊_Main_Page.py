@@ -6,11 +6,13 @@ import streamlit as st
 import folium
 from PIL import Image
 from streamlit_folium import folium_static
+from folium.plugins import MarkerCluster
 
 from utils.process_data import process_data
 
 # Importing the data
 RAW_DATA_PATH = f"./dataset/raw/data.csv"
+df = pd.read_csv("./dataset/processed/data.csv")
 
 # =======================================
 # Functions
@@ -20,17 +22,24 @@ RAW_DATA_PATH = f"./dataset/raw/data.csv"
 def sidebar(df):
 
     """ Function that creates the sidebar """
+
     image = Image.open("./img/logo.jpg")
     st.sidebar.image(image, width=25)
 
     st.sidebar.markdown("# Fome Zero!")
     st.sidebar.markdown("## Filtros")
 
-    countries_options = st.sidebar.multiselect(
-        "Escolha os Paises que Deseja visualizar os Restaurantes",
-        df.loc[:, "country"].unique().tolist(),
-        default=["Brazil", "England", "India", "United States of America", "Turkey", "Australia"],
-    )
+    all_countries = df.loc[:, "country"].unique().tolist()
+    select_all_countries = st.sidebar.checkbox("Selecionar todos os países", True)
+
+    if select_all_countries:
+        selected_countries = all_countries
+    else:
+        selected_countries = st.sidebar.multiselect(
+            "Escolha os Países que Deseja visualizar as Informações:",
+            all_countries[1:],  # Exclui "Todos" da lista
+            default=["Brazil", "England", "India", "United States of America", "Turkey", "Australia"],
+        )
 
     st.sidebar.markdown("## Dados Tratados")
 
@@ -43,17 +52,18 @@ def sidebar(df):
         mime="text/csv",
     )
 
-    return list(countries_options)
+    return list(selected_countries)
 
 # Function that creates the leaflet map
-def create_leaflet_map(df):
+def create_leaflet_map(map_df):
 
     """ Function that creates the leaflet map """
-    map = folium.Map(location=[df["latitude"].mean(), df["longitude"].mean()], zoom_start=1)
-    marker_cluster = folium.plugins.MarkerCluster().add_to(map)
+    # Create a map centered around the mean latitude and longitude
+    map = folium.Map(location=[0, 0], zoom_start=2)
+    marker_cluster = MarkerCluster().add_to(map)
 
-    for index, row in df.iterrows():
-
+    # Iterate over the rows of the dataframe and add markers to the map
+    for _, row in map_df.iterrows():
         popup_content = f"""
         <b>{row["restaurant_name"]}</b><br>
         <p>Preço: {row["average_cost_for_two"]} {row["currency"]} para dois<br>
@@ -62,9 +72,14 @@ def create_leaflet_map(df):
         Comentário: {row["rating_text"]}</p>
         """
 
-        folium.Marker([row["latitude"], row["longitude"]], popup=folium.Popup(popup_content, max_width=300), icon=folium.Icon(icon="home", color=row["color_name"])).add_to(marker_cluster)
+        folium.Marker(
+            location=[row["latitude"], row["longitude"]],
+            popup=folium.Popup(popup_content, max_width=300),
+            icon=folium.Icon(icon="home", color=row["color_name"])
+        ).add_to(marker_cluster)
 
-    folium_static(map, width=1000, height=700)
+    # Render the map in Streamlit
+    folium_static(map, width=1280, height=720)
 
 # Main function
 def main():
@@ -115,5 +130,5 @@ def main():
 
         return None
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()

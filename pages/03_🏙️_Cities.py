@@ -2,35 +2,34 @@
 
 # Importing the libraries
 import streamlit as st
+import pandas as pd
 import plotly.express as px
 from utils import cities_data as cdt
 
+# Importing the data
+df = cdt.read_processed_data()
+
 # Function that creates the sidebar
-def sidebar(df):
+def sidebar():
 
     """ Function that creates the sidebar """
     st.sidebar.markdown("## Filtros")
 
-    all_countries = ["Todos"] + df.loc[:, "country"].unique().tolist()
+    all_countries = df.loc[:, "country"].unique().tolist()
+    select_all_countries = st.sidebar.checkbox("Selecionar todos os países", True)
 
-    container = st.sidebar.container()
-    select_all = container.checkbox("Selecionar todos os países")
-
-    if select_all:
-        selected_countries = container.multiselect(
-            "Escolha os Paises que Deseja visualizar as Informações:",
-            all_countries,
-            default=all_countries,
-        )
+    if select_all_countries:
+        selected_countries = all_countries
     else:
-        selected_countries = container.multiselect(
+        selected_countries = st.sidebar.multiselect(
             "Escolha os Paises que Deseja visualizar as Informações:",
             all_countries[1:],  # Exclui "Todos" da lista
             default=["Brazil", "England", "India", "United States of America", "Turkey", "Australia"],
         )
 
     selected_palette = st.sidebar.selectbox(
-        "Escolha a paleta de cores dos gráficos", px.colors.named_colorscales(), index=4
+        "Escolha a paleta de cores dos gráficos",
+        px.colors.named_colorscales(), index=0
     )
 
     return selected_countries, selected_palette
@@ -41,9 +40,7 @@ def main():
     """ Main function of the page """
     st.set_page_config(page_title="Cities", page_icon="🏙️", layout="wide")
 
-    df = cdt.read_processed_data()
-
-    selected_countries,selected_palette = sidebar(df)
+    selected_countries, selected_palette = sidebar()
 
     st.markdown("# :cityscape: Visão Cidades")
 
